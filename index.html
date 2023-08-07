@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vivo Object Detection</title>
+  <link rel="stylesheet" href="./style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'><link rel="stylesheet" href="./style.css">
+</head>
+<body style="background-color:#483d8b;">
+  <img  class= "multiplier" src="./image001 (1).png" style="position:absolute; left:20px; top:20px;  width:150px; height: 30px;"
+  ></img>
+ 
+  <h1 style="color:whitesmoke; margin-top:20px;"><Strong>Upload your file here <span></span></Strong></h1>
+  <div class="upper-box">
+  <div class="buttons">
+    <div class="custom-file-upload">
+      <!--<label for="file">File: </label>-->
+      <input type="file" id="file" name="myfiles[]" multiple onchange="uploadImage(event)"/>
+      <button class="nextbtn" id="nextImageBtn" style="display:none" onclick="refreshPage()">UPLOAD</button>
+    </div>
+  </div>
+
+  <div class="image-container">
+    <!-- Image will be displayed here -->
+  </div>
+
+  <div class="speedo">
+    <canvas id="foo"><strong id="pcent"></strong> </canvas>
+    
+    
+    <!-- <div class="wrap">
+      <button onclick="chamar()">Try</button>
+        <input type="text" id="campo">Insert a number 0 ~ 200</div> -->
+  </div>
+  </div>
+  
+
+
+
+
+<!-- Round Bars -->
+<div class="bg-style" id="Round-chart" style="display:none;">
+  
+  <div class="wrapper">
+    <div class="row pt-5 pb-5">
+      <div class="col-6 col-sm-3">
+        <div class="counter" data-cp-percentage="" data-cp-color="#00bfeb">
+        </div>
+        <h4>Vivo</h4>
+        
+      </div>
+      <div class="col-6 col-sm-3">
+        <div class="counter" data-cp-percentage="" data-cp-color="#EA4C89"></div>
+        <h4>Oppo</h4>
+        
+      </div>
+      <div class="col-6 col-sm-3">
+        <div class="counter" data-cp-percentage="" data-cp-color="#FF675B"></div>
+        
+        <h4>Samsung</h4>
+      
+      </div>
+      <div class="col-6 col-sm-3">
+        <div class="counter" data-cp-percentage="0" data-cp-color="#FF9900"></div>
+        <h4>Xiaomi</h4>
+
+      </div>
+    </div>
+  </div>
+ 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="result">
+    <p id="percentage"><b></b></p>
+    <p id="vivocount" style="margin-bottom:20px;"></p>
+  </div>
+
+ 
+  <!-- Chart start -->
+  <div class="chart" id="myChart" style="display: none; ">
+    <ul class="numbers">
+      <li><span>100%</span></li>
+      <li><span>50%</span></li>
+      <li><span>0%</span></li>
+    </ul>
+    <ul class="bars" style=" box-shadow: 0 0 10px 0 #fff;">
+      
+      <li class="list"><div class="bar" ></div><span >Vivo</span></li>
+      <li class="list"><div class="bar"  ></div><span >Samsung</span></li>
+      <li class="list"><div class="bar" ></div><span >Oppo</span></li>
+      <li class="list"><div class="bar" ></div><span >Xiaomi</span></li>
+    </ul>
+  </div>
+  <!-- Chart end -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+  <script src="./script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src='https://bernii.github.io/gauge.js/dist/gauge.min.js'></script>
+  <script>
+
+
+
+
+
+// Speedometer
+var opts = {
+  lines: 12, // The number of lines to draw
+  angle: 0.00, // The length of each line
+  lineWidth: 0.44, // The line thickness
+  
+ 
+  pointer: {
+    length: 0.5, // The radius of the inner circle
+    strokeWidth: 0.035, // The rotation offset
+    color: 'red' // Fill color
+  },
+  
+  limitMax: false,   // If true, the pointer will not go past the end of the gauge
+  colorStart: 'blue',   // Colors
+  colorStop: '#9efd38',    // just experiment with them
+  strokeColor: '#E0E0E0',   // to see which ones work best for you
+  generateGradient: true
+};
+var target = document.getElementById('foo'); // your canvas element
+var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+gauge.maxValue = 100; // set max gauge value
+gauge.animationSpeed = 32; // set animation speed (32 is default value)
+
+// function chamar(valor){
+//   // set actual value
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function showNextImageBtn(){
+  document.getElementById('nextImageBtn').style.display="block";
+}
+
+function refreshPage(){
+  location.reload();
+}
+
+ function animateBars() {
+      $('.bars li .bar').each(function (key, bar) {
+        var percentage = $(this).data('percentage');
+        $(this).animate({
+          'height': percentage + '%'
+        }, 1000);
+        console.log("I am Running");
+      });
+    }
+
+    function renderChart(Vivo_conf,Samsung_conf,Oppo_conf,Mi_conf){
+      document.querySelector('.bars li:nth-child(1) .bar').setAttribute('data-percentage', Vivo_conf);
+document.querySelector('.bars li:nth-child(2) .bar').setAttribute('data-percentage', Samsung_conf);
+document.querySelector('.bars li:nth-child(3) .bar').setAttribute('data-percentage', Oppo_conf);
+document.querySelector('.bars li:nth-child(4) .bar').setAttribute('data-percentage', Mi_conf);
+
+animateBars();
+    }
+
+
+    function uploadImage(event) {
+      const file = event.target.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+
+
+      axios.post("https://detect.roboflow.com/vivo/5?api_key=ZctjutykcfT7GHP3fx5L", formData)
+        .then(function (response) {
+          const json = response.data;
+          const obj = JSON.parse(JSON.stringify(json));
+
+
+      
+          // The rest of the code for processing the response and chart animation
+        let VivoCount = 0;
+    let OppoCount = 0;
+    let MI_Count = 0;
+    let Samsung_Count = 0;
+
+    let Vivo_Total_Confidence = 0;
+
+    let Oppo_Total_Confidence = 0;
+
+    let Mi_Total_Confidence = 0;
+
+    let samsung_Total_Confidence = 0;
+
+    obj.predictions.forEach(element => {
+        if(element.class == "Vivo"){
+
+          if(obj.predictions[VivoCount].confidence == "NAN%")
+          {
+              Vivo_Total_Confidence = 0;
+              
+          }
+          else{
+
+            Vivo_Total_Confidence += obj.predictions[VivoCount].confidence;
+            //console.log(Total_Confidence);
+            VivoCount ++;
+          }
+            
+        }
+        
+        if(element.class == "Samsung"){
+            
+          if(obj.predictions[Samsung_Count].confidence == "NAN%")
+          {
+              samsung_Total_Confidence = 0;
+              
+          }
+          else{
+
+            samsung_Total_Confidence += obj.predictions[Samsung_Count].confidence;
+            //console.log(Total_Confidence);
+            Samsung_Count ++;
+          }
+        }
+        
+        if(element.class == "Oppo"){
+
+          if(obj.predictions[OppoCount].confidence == "NAN%")
+          {
+              Oppo_Total_Confidence = 0;
+              
+          }
+            Oppo_Total_Confidence += obj.predictions[OppoCount].confidence;
+            //console.log(Total_Confidence);
+            OppoCount ++;
+        }
+
+        if(element.class == "Xiaomi"){
+
+          if(obj.predictions[MI_Count].confidence == "NAN%")
+          {
+              Mi_Total_Confidence = 0;
+              
+          }
+            Mi_Total_Confidence += obj.predictions[MI_Count].confidence;
+            //console.log(Total_Confidence);
+            MI_Count ++;
+        }
+    });
+    
+    if(VivoCount == 0){
+    }
+
+    let Vivo_average = Vivo_Total_Confidence / VivoCount;
+
+    let Mi_average = Mi_Total_Confidence / MI_Count;
+
+    let Oppo_average = Oppo_Total_Confidence / OppoCount;
+
+    let Samsung_average = samsung_Total_Confidence / Samsung_Count;
+    
+
+    let Vivo_Cal_confidence = Vivo_average* 100;
+    let Mi_Cal_confidence = Mi_average* 100;
+    let Samsung_Cal_confidence = Samsung_average* 100;
+    let Oppo_Cal_confidence = Oppo_average* 100;
+    //console.log(Cal_confidence);
+
+
+
+    
+     Vivo_conf = Math.floor(Vivo_Cal_confidence);
+    var Mi_conf = Math.floor(Mi_Cal_confidence);
+    var Oppo_conf = Math.floor(Oppo_Cal_confidence);
+    var Samsung_conf = Math.floor(Samsung_Cal_confidence);
+
+   
+  document.getElementById("pcent").innerHTML=Vivo_conf;
+  gauge.set(Vivo_conf);
+
+
+    console.log(Vivo_conf + " %" + " Vivo");
+    console.log(Mi_conf + " %" + " MI");
+    console.log(Samsung_conf + " %" + " Samsung");
+    console.log(Oppo_conf + " %" + " Oppo");
+
+animateBars();
+    document.querySelector('.bars li:nth-child(1) .bar').setAttribute('data-percentage', Vivo_conf);
+document.querySelector('.bars li:nth-child(2) .bar').setAttribute('data-percentage', Samsung_conf);
+document.querySelector('.bars li:nth-child(3) .bar').setAttribute('data-percentage', Oppo_conf);
+document.querySelector('.bars li:nth-child(4) .bar').setAttribute('data-percentage', Mi_conf);
+
+setTimeout(function(){animateBars();},100)
+
+
+
+          // // Display the percentages in the respective elements
+          // document.getElementById('vivo_result'). = Vivo_conf;
+          // document.getElementById('oppo').innerHTML = Oppo_conf;
+          // document.getElementById('samsung').innerHTML = Samsung_conf;
+          // document.getElementById('xiaomi').innerHTML = Mi_conf;
+
+          document.getElementById('pcent').innerHTML=Vivo_conf;
+
+          document.getElementById('myChart').style.display="block";
+                  document.getElementById('percentage').innerHTML ="Confidence in detecting VIVO is: <span class='bordered'>" + Vivo_conf + "%</span>";
+document.getElementById('Round-chart').style.display="block";
+
+                  document.getElementById('vivocount').innerHTML =
+                      "Detection Frequency: <span class='bordered'>" + VivoCount + " times</span>";
+             renderChart(Vivo_conf,Samsung_conf,Oppo_conf,Mi_conf);
+           showNextImageBtn();
+          
+           
+        })
+        .catch(function (error) {
+          console.log(error.message);
+        });
+
+      // Display the uploaded image
+      const imageContainer = document.querySelector('.image-container');
+      imageContainer.innerHTML = ''; // Clear any previous image
+      const imgElement = document.createElement('img');
+      imgElement.src = URL.createObjectURL(file);
+      imgElement.style.maxWidth = '100%';
+      imageContainer.appendChild(imgElement);
+
+      
+
+    }
+    document.getElementById('myChart').style.display="none";
+    
+    
+  </script>
+
+  
+</body>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+</html>

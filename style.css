@@ -1,0 +1,508 @@
+@import url("https://fonts.googleapis.com/css?family=Lato");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+* {
+  font-family: Lato, Arial;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  text-align:center;
+ 
+}
+
+
+/* Round Chart Styles */
+
+
+
+
+
+
+
+
+.counter {
+  display: inline-flex;
+  cursor:pointer;
+  width:300px;
+  height:300px;
+  max-width:100%;
+  position:relative;
+  justify-content:center;
+  align-items:center;
+  font-size: calc(1em + 1vmin);
+  transition: height .2s ease-in-out;
+  background: #fff;
+  border-radius:50%;
+  box-shadow:0px 1px 10px 2px rgba(0,0,0,0.2);
+  margin:1em 0;
+}
+.percentage {
+  position:absolute;
+  text-align:center;
+  top:50%;
+  left:0;
+  right:0;
+  vertical-align:middle;
+  transform:translate3d(0,-50%,0);
+}
+canvas {
+  position:absolute;
+  top:0;
+  left:0;
+}
+input {
+    width: 200px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.upper-box{
+
+  box-shadow: 0 0 10px 0 #fff;
+  border-radius:10px;
+  background-color:#372c78 ;
+  
+  
+}
+
+
+.bar-fill{
+  border:2px solid black;
+}
+
+.bar {
+  /* Your existing styles here for the bar */
+  position: relative;
+  /* height: 50px; Set a fixed height for the bars */
+}
+
+.list {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 0; /* Set padding to 0 to reduce padding around the border */
+  position: relative;
+  /* border: 1px solid grey;
+  background-color: grey; /* Add a border around the list element */
+   
+} */
+
+body {
+  color: #fff;
+  padding: 55px 25px;
+
+  
+
+}
+.buttons{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+@media screen and (max-width=600px){
+  .button{
+    flex-direction:column;
+  }
+}
+
+
+h1 {
+  font-weight: normal;
+  font-size: 40px;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+h1 span {
+  font-size: 13px;
+  display: block;
+  padding-left: 4px;
+}
+
+.result{
+  margin-top:80px;
+  margin-left: 36%;
+  box-shadow: 0 0 10px 0 #fff;
+  border-radius:10px;
+  width:400px;
+  padding-top:17px;
+  padding-bottom: 7px;
+  background-color: whitesmoke;
+ 
+
+}
+
+
+
+p {
+  margin-top: 30px;
+}
+p a {
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  color: #fff;
+  padding: 5px 10px;
+  margin: 0 5px;
+  background-color: #b83729;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+p a:hover {
+  background-color: #ab3326;
+}
+
+.custom-file-upload-hidden {
+  display: none;
+  visibility: hidden;
+  position: absolute;
+  left: -9999px;
+}
+
+.custom-file-upload {
+  display: block;
+  width: auto;
+  font-size: 16px;
+  margin-top: 30px;
+}
+.custom-file-upload label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.file-upload-wrapper {
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.file-upload-input {
+  border-radius:5px;
+  width: 120px;
+  color: #353;
+  font-size: 16px;
+  padding: 11px 17px;
+  border: none;
+  background-color: #fff;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  float: left;
+/*  margin-left:38%; */
+  /* IE 9 Fix */
+}
+.file-upload-input:hover, .file-upload-input:focus {
+  background-color: whitesmoke;
+  outline: none;
+  border-radius:10px;
+}
+
+.file-upload-button {
+  width:120px;
+  border-radius:5px;
+  cursor: pointer;
+  display: inline-block;
+  color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  padding: 11px 20px;
+  border: none;
+  margin-left: -1px;
+  background-color: #05187C;
+  float: left;
+  /* IE 9 Fix */
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  margin-left:20px;
+}
+.file-upload-button:hover {
+  background-color: #555;
+  border-radius:10px;
+}
+
+/* body{
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  background: #333;
+}
+ */
+.chart{
+  width: 600px;
+  height: 400px;
+  display: flex;
+  margin-left:auto;
+  margin-right:auto;
+  flex-direction:column;
+  align-content:left;
+
+  
+}
+
+.numbers{
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  width: 50px;
+  height: 100%;
+  display: inline-block;
+  float: left;
+}
+
+.numbers li{
+  list-style: none;
+  height: 150px;
+  position: relative;
+  bottom: 145px;
+}
+
+.numbers span{
+  font-size: 12px;
+  font-weight: 600;
+  position: relative;
+  bottom: -130px;
+  right: 10px;
+}
+.chart{
+
+  /* background-image: url(./image001\ \(1\).png); */
+  margin-left:32%;
+  margin-top: 50px;
+}
+
+
+.bars{
+ 
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  /* background: whitesmoke; */
+  margin-top:20px;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  width: 400px;
+  height: 300px;
+  /* box-shadow: 0 0 10px 0 #fff; */
+  border-radius: 5px;
+}
+
+.bordered {
+        border: 2px solid #05187C;
+  border-radius:5px;     
+  padding: 2px 5px;
+        background-color:#05187C;
+        color:whitesmoke
+    }
+
+.bars li{
+  display: table-cell;
+  width: 100px;
+  height: 300px;
+  position: relative;
+}
+
+.bars span{
+  width: 80%;
+  position: absolute;
+  bottom: -30px;
+  text-align: center;
+}
+
+.bars .bar{
+  display: block;
+  width: 50px;
+  position: absolute;
+  bottom: 0;
+  margin-left: 25px;
+  text-align: center;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  transition: 0.5s;
+  transition-property: box-shadow;
+}
+
+.bars li:nth-child(1) .bar {
+                                                                   background: -webkit-linear-gradient(2deg, #ffffff,#0072b8);/* Chrome 10-25, Safari 5.1-6 */                          background: linear-gradient(2deg, #ffffff,#0072b8);/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */                                             
+/*   background: #0072B8; /* Blue */ */
+}
+
+.bars li:nth-child(2) .bar {
+  background: -webkit-linear-gradient(359deg, #ffffff,#1428a0,#1428a0);/* Chrome 10-25, Safari 5.1-6 */                          background: linear-gradient(359deg, #ffffff,#1428a0,#1428a0);/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */                                             
+  /*   background:#1428a0 ;  */
+}
+
+.bars li:nth-child(3) .bar {
+  background: -webkit-linear-gradient(2deg, #ffffff,#7bd185,#27ae60,#27ae60);/* Chrome 10-25, Safari 5.1-6 */                          background: linear-gradient(2deg, #ffffff,#7bd185,#27ae60,#27ae60);/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */                                             
+  /*   background: #27AE60; /* Orange */ */
+  
+                                                                
+}
+
+.bars li:nth-child(4) .bar {
+                                                                 background: -webkit-linear-gradient(359deg, #ffffff,#ff6700,#ff6700);/* Chrome 10-25, Safari 5.1-6 */                          background: linear-gradient(359deg, #ffffff,#ff6700,#ff6700);/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */                                             
+  /*   background: #FF6700; /* Red */ */
+}
+
+.bars li:nth-child(5) .bar {
+                                                                   background: -webkit-linear-gradient(359deg, #ffffff,#fffd37,#fffd37);/* Chrome 10-25, Safari 5.1-6 */                          background: linear-gradient(359deg, #ffffff,#fffd37,#fffd37);/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */                                             
+                    
+/*   background:#fd800y #ffd800y; /* Purple */ */
+}
+
+.bars .bar:hover{
+
+  box-shadow: 0 0 10px 0 rgba(85, 239, 196, 0.5);
+  cursor: pointer;
+}
+
+.bars .bar:before{
+  color: #fff;
+  content: attr(data-percentage) '%';
+  position: relative;
+  bottom: 20px;
+}
+
+
+/* Add responsive styles for smaller screens */
+@media screen and (max-width: 600px) {
+.counter{
+      width: 150px; /* Adjust the width as needed for smaller screens */
+      height: 150px; /* Adjust the height as needed for smaller screens */
+      font-size: calc(0.6em + 1vmin); /* Adjust the font size for smaller screens */
+    
+  
+}
+
+  body {
+    padding: 30px 15px;
+  }
+ 
+  h1 {
+    font-size: 30px;
+  }
+  .chart {
+    margin-right:10px;
+    width: 50px;
+    height: 20px;
+    margin-left:0%;
+    flex-direction:row;
+
+  }
+  
+  
+  .numbers{
+   
+    margin-left:-50px;
+  }
+
+  .result{
+    margin-left:8%;
+    
+    width:300px;
+    
+  }
+
+
+
+ 
+}
+
+
+.nextbtn{
+  position:relative;
+  bottom:46px;
+  margin-left:140px;
+  color:whitesmoke;
+  font-size: 15px;
+  width:130px;
+  height: 50px;
+  text-align:center;
+  background-color:#05187C ;
+  border:1px solid #05187C;
+  border-radius:5px;  
+}
+.nextbtn:hover{
+  background-color: #555;
+  border:1px solid #555;
+}
+
+
+
+.bars{
+  display: flex;
+  justify-content: space-between; /* Distribute items horizontally */
+}
+
+.image-container img{
+  box-shadow: 0 0 10px 0 #fff;
+  border-radius:10px;
+/*   box-shadow: 2px 2px; */
+}
+
+.image-container {
+  width:200px;
+  hieght:200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-left:42%;
+  
+ 
+  /* Add some space between chart and image */
+ 
+  
+}
+
+.chart-container {
+  /* Default width and height for larger screens */
+  width: 400px;
+  height: 300px;
+  display: flex;
+  flex-direction: column; /* Stack list items vertically */
+  margin-bottom: 20px; /* Add some space at the bottom */
+}
+
+@media screen and (max-width: 600px) {
+  
+  .image-container{
+    margin-left:25%;
+  }
+  
+  .multiplier{
+    margin-top:-10px;
+    margin-left:95px;
+     }  
+  .chart-container {
+    /* Width and height for smaller screens */
+    width: 300px;
+    height: 200px;
+    flex-direction: row; /* Display list items side by side */
+  }
+}
+
+
+#foo{
+  position:relative;
+  
+   margin-top:30px;
+  /* margin-right:10px; */ 
+  height:100px;
+  width:200px;
+}

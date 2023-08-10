@@ -129,6 +129,14 @@ let vivoPercentage;     // Example value, replace with actual value
 
 
 
+  function triggerChartAnimation(value) {
+  if (value > 1) {
+    animateBars(); // Start the bars animation
+    circleProgress('.counter'); // Start the round chart animation
+  }
+}
+
+
 
 
 
@@ -221,6 +229,9 @@ animateBars();
         let MI_Count = 0;
         let Samsung_Count = 0;
 
+
+
+
         let Vivo_Total_Confidence = 0;
 
         let Oppo_Total_Confidence = 0;
@@ -287,8 +298,15 @@ animateBars();
 
 
 
+        function renderCircle(vivoPercentage,oppoPercentage,samsungPercentage,xiaomiPercentage){
+        var counters = document.querySelectorAll(".counter");
+          console.log(vivoPercentage+"hi there");
+      counters[0].setAttribute("data-cp-percentage", vivoPercentage);
+      counters[1].setAttribute("data-cp-percentage", oppoPercentage);
+      counters[2].setAttribute("data-cp-percentage", samsungPercentage);
+      counters[3].setAttribute("data-cp-percentage", xiaomiPercentage);
 
-
+        }
 
       
   var circleProgress = (function(selector) {
@@ -361,20 +379,23 @@ animateBars();
         context.strokeStyle = strokeStyle;
         context.stroke();
       }
+     
 
       var update = function() {
         getValues();
-        var counters = document.querySelectorAll(".counter");
-        console.log(vivoPercentage+"hi there");
-    counters[0].setAttribute("data-cp-percentage", vivoPercentage);
-    counters[1].setAttribute("data-cp-percentage", oppoPercentage);
-    counters[2].setAttribute("data-cp-percentage", samsungPercentage);
-    counters[3].setAttribute("data-cp-percentage", xiaomiPercentage);
+
+        renderCircle(vivoPercentage,samsungPercentage,oppoPercentage,xiaomiPercentage);
        getValues();
     
-            animate();
+              animate();
       };
-      update();
+      setTimeout(function () {
+  update();
+},500);
+    
+
+
+      // update();
 
       var resizeTimer;
       window.addEventListener("resize", function() {
@@ -441,10 +462,15 @@ animateBars();
     var Samsung_conf = Math.floor(Samsung_Cal_confidence);
 
 
-   vivoPercentage = Vivo_conf;     // Example value, replace with actual value
-  oppoPercentage=Oppo_conf;      // Example value, replace with actual value
-  samsungPercentage=Samsung_conf;   // Example value, replace with actual value
-  xiaomiPercentage=Mi_conf;
+
+
+
+
+
+         vivoPercentage = Vivo_conf;     // Example value, replace with actual value
+       oppoPercentage=Oppo_conf;      // Example value, replace with actual value
+       samsungPercentage=Samsung_conf;   // Example value, replace with actual value
+        xiaomiPercentage=Mi_conf;
 
   document.getElementById("pcent").innerHTML=Vivo_conf;
   gauge.set(Vivo_conf);
@@ -455,13 +481,14 @@ animateBars();
     console.log(Samsung_conf + " %" + " Samsung");
     console.log(Oppo_conf + " %" + " Oppo");
 
-animateBars();
-    document.querySelector('.bars li:nth-child(1) .bar').setAttribute('data-percentage', Vivo_conf);
-document.querySelector('.bars li:nth-child(2) .bar').setAttribute('data-percentage', Samsung_conf);
-document.querySelector('.bars li:nth-child(3) .bar').setAttribute('data-percentage', Oppo_conf);
-document.querySelector('.bars li:nth-child(4) .bar').setAttribute('data-percentage', Mi_conf);
+    animateBars();
+    //     document.querySelector('.bars li:nth-child(1) .bar').setAttribute('data-percentage', Vivo_conf);
+    // document.querySelector('.bars li:nth-child(2) .bar').setAttribute('data-percentage', Samsung_conf);
+    // document.querySelector('.bars li:nth-child(3) .bar').setAttribute('data-percentage', Oppo_conf);
+    // document.querySelector('.bars li:nth-child(4) .bar').setAttribute('data-percentage', Mi_conf);
+   renderChart(Vivo_conf,Samsung_conf,Oppo_conf,Mi_conf);
 
-setTimeout(function(){animateBars();},100)
+    setTimeout(function(){animateBars();},100)
 
 
 
